@@ -16,6 +16,7 @@ if tagged?('do_patch')
 
   # Reboots server only if notified
   reboot 'now' do
+    delay_mins 2
     action :nothing
     reason 'Chef has requested reboot.'
   end
