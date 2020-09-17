@@ -34,14 +34,14 @@ if tagged?('do_patch')
   end
 
   # Check if pre patch reboot is required
-  unless tagged?('pre_patch_rebooted')
-    tag('pre_patch_rebooted')
-    execute 'Check if pre_patch reboot is required' do
-      command "echo 'pre patch reboot underway'"
-      notifies :reboot_now, 'reboot[now]', :immediately
-    end
-    return
-  end
+#  unless tagged?('pre_patch_rebooted')
+#    tag('pre_patch_rebooted')
+#    execute 'Check if pre_patch reboot is required' do
+#      command "echo 'pre patch reboot underway'"
+#     notifies :reboot_now, 'reboot[now]', :immediately
+#    end
+#    return
+#  end
 
   if tagged?('pre_patch_rebooted')
     untag('pre_patch_rebooted')
@@ -54,7 +54,7 @@ if tagged?('do_patch')
       # Run the patching script
       execute 'Patch server' do
         command patch_script
-        notifies :request_reboot, 'reboot[now]', :delayed
+#        notifies :request_reboot, 'reboot[now]', :delayed
       end
     else
       raise 'Can not patch node due to insufficient disk space'
