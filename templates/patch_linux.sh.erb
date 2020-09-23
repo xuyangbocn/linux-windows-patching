@@ -51,7 +51,7 @@ update() {
             DEBIAN_FRONTEND=none apt-get update -y >> $log
             DEBIAN_FRONTEND=none apt-get upgrade -y --fix-missing >> $log
             ;;
-        'rhel')
+        'rhel' | 'amazon')
             yum makecache fast -y >> $log
             yum update -y >> $log
             ;;
@@ -61,8 +61,8 @@ update() {
             zypper update -y >> $log
             ;;
         *)
-            echo "OS family not recognised: $os_fam"
-            echo 'Exiting.'
+            echo "OS family not recognised: $os_fam" >> $log
+            echo 'Exiting.' >> $log
             exit 1
             ;;
     esac
